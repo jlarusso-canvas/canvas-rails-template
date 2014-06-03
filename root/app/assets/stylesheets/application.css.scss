@@ -1,3 +1,15 @@
+// Libs
 @import 'compass/reset';
-@import 'mixins';
+
+// Defaults for fonts, colors, form elements, grids, etc.
 @import 'base';
+
+// Button creators, themes, etc.
+@import 'mixins';
+
+// Lozenges, lists, arrows, etc.
+@import 'components';
+
+// Page specific, 1 file per resource.
+@import 'layouts';
+
