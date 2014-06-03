@@ -13,10 +13,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring', group: :development
 
 
-# Questionable
+# Server and caching
 # -----------------------------------------------------------------------------
-# gem 'unicorn'
-# gem 'dalli'
+gem 'unicorn'
+gem 'dalli'
 
 
 # Templates and assets
@@ -53,31 +53,10 @@ group :development, :test do
 end
 
 
-# CMS
-# -----------------------------------------------------------------------------
-gem 'bootstrap-sass'
-gem 'devise'
-gem 'simple_form'
-
-
-# Async
-# -----------------------------------------------------------------------------
-gem 'resque'
-gem 'sidekiq'
-gem 'timecop'
-
-
-# Mail
-# -----------------------------------------------------------------------------
-gem 'letter_opener', group: :development
-gem 'devise-async'
-gem 'email-spec', group: :test
-
-
 # Optional
 # -----------------------------------------------------------------------------
 gem 'awesome_print'
 gem 'draper'
-gem 'annotate_models'
-gem 'guard-livereload', require: false, group: :development
+gem 'annotate'
+gem 'yard'
 

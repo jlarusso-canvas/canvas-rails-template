@@ -1,0 +1,7 @@
+
+# Mail
+# -----------------------------------------------------------------------------
+gem 'letter_opener', group: :development
+gem 'devise-async'
+gem 'email_spec', group: :test
+
