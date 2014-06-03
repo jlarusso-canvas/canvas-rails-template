@@ -60,17 +60,3 @@ gem 'draper'
 gem 'annotate'
 gem 'yard'
 
-
-# CMS
-# -----------------------------------------------------------------------------
-gem 'bootstrap-sass'
-gem 'devise'
-gem 'simple_form'
-
-
-# Mail
-# -----------------------------------------------------------------------------
-gem 'letter_opener', group: :development
-gem 'devise-async'
-gem 'email_spec', group: :test
-

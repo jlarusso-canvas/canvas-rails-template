@@ -1,29 +1,35 @@
 require 'pry'
-task :create do
-  if ENV['name']
-    puts "Include CMS gems? (y/n)"
-    input = $stdin.gets.chomp
-    if input == "y" || input == "Y" || input == "yes"
-      puts "Including..."
-    else
-      puts "Skipping..."
-    end
-    puts ""
 
-    puts "Include mail gems? (y/n)"
-    input = $stdin.gets.chomp
-    if input == "y" || input == "Y" || input == "yes"
-      puts "Including..."
-    else
-      puts "Skipping..."
-    end
-    puts ""
+task :new do
+  puts "Enter Rails project name:"
+  proj_name = $stdin.gets.strip
+  puts ""
 
-    # puts `rails new ../#{ENV['name']} -m templates/template.rb --skip-gemfile --skip-test-unit -d mysql`
-    # TODO: copy over rails root dir to project folder
-    # puts `cp root/Gemfile ../#{ENV['name']}`
+  # Reset
+  File.delete('root/Gemfile') if File.exist?('root/Gemfile')
+  `cp templates/Gemfile root/Gemfile`
+
+  puts "Include CMS gems? (y/n)"
+  input = $stdin.gets.strip
+  if input == "y" || input == "yes"
+    puts "Including..."
+    `cat gem-groups/cms >> root/Gemfile`
   else
-    puts "You forgot to specify a rails project name:"
-    puts "e.g. 'rake create name=sample-project'"
+    puts "Skipping..."
   end
+  puts ""
+
+  puts "Include mail gems? (y/n)"
+  input = $stdin.gets.strip
+  if input == "y" || input == "yes"
+    puts "Including..."
+    `cat gem-groups/mail >> root/Gemfile`
+  else
+    puts "Skipping..."
+  end
+  puts ""
+
+  # puts `rails new ../#{proj_name} -m templates/template.rb --skip-gemfile --skip-test-unit -d mysql`
+  # TODO: copy over root dir to project folder
+  # puts `cp root/Gemfile ../#{proj_name}`
 end
