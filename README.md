@@ -15,4 +15,6 @@ canvas-rails-template
 - asset sync?
 
 ### TODO
-- page specific js?
+- page specific js/css?
+- js safety closures issue?
+
