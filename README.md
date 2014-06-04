@@ -14,3 +14,5 @@ canvas-rails-template
 - explain asset directory structure
 - asset sync?
 
+### TODO
+- page specific js?
