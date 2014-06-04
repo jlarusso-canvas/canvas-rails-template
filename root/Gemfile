@@ -61,13 +61,6 @@ gem 'annotate'
 gem 'yard'
 
 
-# CMS
-# -----------------------------------------------------------------------------
-gem 'bootstrap-sass'
-gem 'devise'
-gem 'simple_form'
-
-
 # Mail
 # -----------------------------------------------------------------------------
 gem 'letter_opener', group: :development
