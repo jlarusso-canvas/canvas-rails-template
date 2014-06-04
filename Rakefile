@@ -55,7 +55,6 @@ task :new do
   puts ""
   puts "-> Creating Rails app.".blue
   puts `rails new ../#{proj_name} --skip-gemfile --skip-test-unit -d mysql`
-  puts `mv -v root/config/routes.rb ../#{proj_name}/config`
 
 
   # Copy Gemfile and 'bundle install'
@@ -100,6 +99,12 @@ task :new do
   # ---------------------------------------------------------------------------
   puts ""
   Dir.chdir("../#{proj_name}") do
+    db_config = File.read('config/database.yml')
+    old = "default: &default\n  adapter: mysql2\n  encoding: utf8\n  pool: 5\n  username: root\n  password:"
+    new = "default: &default\n  adapter: mysql2\n  encoding: utf8\n  pool: 5\n  username: root\n  password: pw"
+    replace = db_config.gsub(old, new)
+    File.open("config/database.yml", "w") { |file| file.puts replace }
+
     puts `rake db:create`
     puts `rake db:migrate`
   end
