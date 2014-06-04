@@ -10,6 +10,7 @@ canvas-rails-template
 
 # Practices
 (to elaborate later)  
+- Refer to yard [documentation](http://rubydoc.info/gems/yard/file/docs/GettingStarted.md) for correct documenting practices.
 - body class thing
 - explain asset directory structure
 - asset sync?

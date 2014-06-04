@@ -24,7 +24,6 @@ gem 'dalli'
 gem 'haml-rails'
 gem 'compass-rails'
 gem 'dragonfly'
-gem 'asset_sync', group: :assets
 
 
 # Testing
