@@ -52,7 +52,38 @@ task :new do
   # ---------------------------------------------------------------------------
   puts ""
   puts "-> Creating Rails app.".blue
-  puts `rails new ../#{proj_name} -m templates/template.rb --skip-gemfile --skip-test-unit -d mysql`
+  puts `rails new ../#{proj_name} --skip-gemfile --skip-test-unit -d mysql`
+  puts `mv -v root/config/routes.rb ../#{proj_name}/config`
+
+
+  # Copy Gemfile and 'bundle install'
+  # ---------------------------------------------------------------------------
+  puts ""
+  puts "-> Installing gems; this may take a minute or two.".blue
+  puts `mv -v root/Gemfile ../#{proj_name}`
+  Dir.chdir("../#{proj_name}") do
+    puts `bundle install`
+  end
+
+
+  # Run installers and generators
+  # ---------------------------------------------------------------------------
+  puts ""
+  puts "-> Running installers and generators.".blue
+  Dir.chdir("../#{proj_name}") do
+    puts `rails generate cucumber:install`
+    puts `guard init rspec`
+    puts `guard init cucumber`
+    puts `rails generate dragonfly`
+
+    # if cms
+    puts `rails generate simple_form:install`
+    puts `rails generate devise:install`
+    puts `rails generate devise Administrator`
+    puts `rake db:migrate`
+
+    # if mail
+  end
 
 
   # Overwrite with custom files
@@ -60,11 +91,6 @@ task :new do
   puts ""
   puts "-> Overwriting with custom files.".blue
   puts `cp -rv root/. ../#{proj_name}`
-
-  puts ""
-  puts "-> Installing gems; this may take a minute or two.".blue
-  Dir.chdir("../#{proj_name}") do
-    puts `bundle install`
-  end
-  puts ""
 end
+puts ""
+
