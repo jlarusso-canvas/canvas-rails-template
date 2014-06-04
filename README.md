@@ -14,6 +14,7 @@ canvas-rails-template
 - body class thing
 - explain asset directory structure
 - asset sync?
+- [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
 
 ### TODO
 - page specific js/css?
