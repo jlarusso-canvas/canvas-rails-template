@@ -4,7 +4,7 @@
     %title
     = stylesheet_link_tag    "application", media: "all"
     = csrf_meta_tags
-  %body
+  %body{class: "#{controller_name} #{action_name}"}
     = yield
 
     = javascript_include_tag "application"
