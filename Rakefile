@@ -1,5 +1,5 @@
 require 'pry'
-require 'fileutils'
+# require 'fileutils'
 
 task :new do
 
@@ -12,7 +12,7 @@ task :new do
 
   # Reset
   # ---------------------------------------------------------------------------
-  File.delete('root/Gemfile') if File.exist?('root/Gemfile')
+  gem_options = []
   `cp templates/Gemfile root/Gemfile`
 
 
@@ -31,6 +31,7 @@ task :new do
   if input == "y" || input == "yes"
     puts "Including..."
     `cat gem-groups/cms >> root/Gemfile`
+    gem_options << 'cms'
   else
     puts "Skipping..."
   end
@@ -42,6 +43,7 @@ task :new do
   if input == "y" || input == "yes"
     puts "Including..."
     `cat gem-groups/mail >> root/Gemfile`
+    gem_options << 'mail'
   else
     puts "Skipping..."
   end
@@ -76,13 +78,14 @@ task :new do
     puts `guard init cucumber`
     puts `rails generate dragonfly`
 
-    # if cms
-    puts `rails generate simple_form:install`
-    puts `rails generate devise:install`
-    puts `rails generate devise Administrator`
-    puts `rake db:migrate`
+    if gem_options.include? 'cms'
+      puts `rails generate simple_form:install`
+      puts `rails generate devise:install`
+      puts `rails generate devise Administrator`
+    end
 
-    # if mail
+    if gem_options.include? 'mail'
+    end
   end
 
 
@@ -91,6 +94,15 @@ task :new do
   puts ""
   puts "-> Overwriting with custom files.".blue
   puts `cp -rv root/. ../#{proj_name}`
+
+
+  # Database stuff
+  # ---------------------------------------------------------------------------
+  puts ""
+  Dir.chdir("../#{proj_name}") do
+    puts `rake db:create`
+    puts `rake db:migrate`
+  end
 end
 puts ""
 
