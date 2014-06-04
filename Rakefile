@@ -51,18 +51,18 @@ task :new do
   # Create project
   # ---------------------------------------------------------------------------
   puts ""
-  puts "-> Creating Rails app".blue
+  puts "-> Creating Rails app.".blue
   puts `rails new ../#{proj_name} -m templates/template.rb --skip-gemfile --skip-test-unit -d mysql`
 
 
   # Overwrite with custom files
   # ---------------------------------------------------------------------------
   puts ""
-  puts "-> Overwriting with custom files".blue
+  puts "-> Overwriting with custom files.".blue
   puts `cp -rv root/. ../#{proj_name}`
 
   puts ""
-  puts "-> Installing gems, please wait".blue
+  puts "-> Installing gems; this may take a minute or two.".blue
   Dir.chdir("../#{proj_name}") do
     puts `bundle install`
   end
