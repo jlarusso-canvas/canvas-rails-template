@@ -77,8 +77,8 @@ task :new do
     replace = db_config.gsub(old, new)
     File.open("config/database.yml", "w") { |file| file.puts replace }
 
-    Project.run "rake db:create"
-    Project.run "rake db:migrate"
+    # Project.run "rake db:create"
+    # Project.run "rake db:migrate"
   end
 
 
@@ -92,8 +92,7 @@ task :new do
   end
 
 
-  puts "Success! Your new Rails project is installed. Let me cd over there for you.".green
-  Project.run "cd ../#{proj.name}"
+  puts "Success! Your new Rails project is installed in '../#{proj.name}'".green
   puts ""
 end
 
