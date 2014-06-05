@@ -11,7 +11,7 @@ class Project
   def ask_gem_group(group_name)
     if valid_gem_group?(group_name)
       print File.open("gem-groups/#{group_name}").read
-      print "-> Include #{group_name} gems? (y/n) ".blue
+      print "-> Include #{group_name} gems? (y/n) ".yellow
       input = $stdin.gets.strip
 
       if input == "y" || input == "yes"
