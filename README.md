@@ -27,42 +27,50 @@ canvas-rails-template
   -[] componenets are to set default styles for html elements
 
 ## Coffeescript naming conventions:
-- Variable names are lowercase and underscored
+- Variable names are lowercase and underscored  
 `item_count = 5`
-- Variable names that contain a jQuery object start with a dollar sign
+- Variable names that contain a jQuery object start with a dollar sign  
 `$item_elements = $('.item')`
-- Instance variables start with an ampersand
+- Instance variables start with an ampersand  
 `@item_color = 'red'`
-- Instance variables that contain a jQuery object start with a dollar sign after an ampersand
+- Instance variables that contain a jQuery object start with a dollar sign after an ampersand  
 `@$items $('ul.item-list')`
-- Constant names are in all caps and underscored
+- Constant names are in all caps and underscored  
 `SECRET_KEY = 's@jEafdsjLkfVJsjl;k'`
-- Function names areCamelCase
+- Function names areCamelCase  
 `doThatThing: (arg) ->`
-- Private function names start with an underscore
+- Private function names start with an underscore  
 `_parseText: (text) ->`
-- Class names are capital camel case
+- Class names are capital camel case  
 `class ItemManager`
 
 ## Modular CSS naming conventions:
 - Use dashes for class-names and id-names. No under\_scores, no camelCase.
 - Think of your CSS in terms of objects.
-    .button { margin: 5px };
+```
+.button { margin: 5px };
+```
 - Avoid nesting Parent-Child relationships.
-    .post { margin: 2px }
-    .post-title { padding-left: 5px; }
+```    
+.post { margin: 2px }
+.post-title { padding-left: 5px; }
+```
 - Subclass variations on a general object.
-    .button {
-      width: 50px;
-      background: blue;
-    }
-    .button-large {
-      @extend .button;
-      width: 100px;
-    }
+```   
+.button {
+  width: 50px;
+  background: blue;
+}
+.button-large {
+  @extend .button;
+  width: 100px;
+}
+```
 - Prefix modifier names with 'is-'
-    .button {
-      background: blue;
-      &.is-selected { background: white; }
-    }
+```  
+.button {
+  background: blue;
+  &.is-selected { background: white; }
+}
+```
 See [John Long's article](http://thesassway.com/advanced/modular-css-naming-conventions) for an in-depth explanation.
