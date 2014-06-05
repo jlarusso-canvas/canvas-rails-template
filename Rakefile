@@ -11,7 +11,9 @@ task :new do
   # Reset
   # ---------------------------------------------------------------------------
   proj = Project.new
-  Project.run "cp templates/Gemfile root/Gemfile"
+  Project.alert "-> Checking Ruby version"
+  Project.run "rvm install 2.1.2"
+  Project.run "cp -v templates/Gemfile root/Gemfile"
 
 
   # Get rails project name
@@ -34,8 +36,8 @@ task :new do
 
   # Copy Gemfile and 'bundle install'
   # ---------------------------------------------------------------------------
-  Project.alert "-> Installing gems; this may take a minute or two."
   Project.run "mv -v root/Gemfile ../#{proj.name}"
+  Project.alert "-> Installing gems; this may take a minute or two."
   proj.exe_in_root { puts `bundle install` }
 
 
@@ -78,5 +80,8 @@ task :new do
     Project.run "rake db:create"
     Project.run "rake db:migrate"
   end
+
+  puts "Success! Your new Rails project is installed at '../#{proj.name}'".green
+  puts ""
 end
 
