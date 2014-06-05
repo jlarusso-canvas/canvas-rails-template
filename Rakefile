@@ -77,8 +77,8 @@ task :new do
     replace = db_config.gsub(old, new)
     File.open("config/database.yml", "w") { |file| file.puts replace }
 
-    # Project.run "rake db:create"
-    # Project.run "rake db:migrate"
+    Project.run "rake db:create"
+    Project.run "rake db:migrate"
   end
 
 
