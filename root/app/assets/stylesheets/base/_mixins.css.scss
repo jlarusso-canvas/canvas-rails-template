@@ -1,0 +1,106 @@
+// TODO: comment
+
+// comment
+@mixin font_size($px_size) {
+  font-size: $px_size + px;
+  font-size: ($px_size/16) + rem;
+}
+
+@mixin line_height($px_size) {
+  line-height: $px_size + px;
+  line-height: ($px_size/16) + rem;
+}
+
+@mixin letter_spacing($ps_value, $font_px_value) {
+  $ls_px_value: ($ps_value * $font_px_value) / 1000;
+  letter-spacing: $ls_px_value + px;
+  letter-spacing: ($ls_px_value/16) + rem;
+}
+
+@mixin font($font_family: $neue_roman) {
+  font-weight: normal;
+  @if $font_family == "bold" {
+    font-family: $neue_bold;
+  }
+  @else if $font_family == "extended" {
+    font-family: $neue_extended;
+  }
+  @else if $font_family == "light_extended" {
+    font-family: $neue_light_extended;
+  }
+  @else if $font_family == "medium_extended" {
+    font-family: $neue_medium_extended;
+  }
+  @else if $font_family == "bold_extended" {
+    font-family: $neue_bold_extended;
+  }
+}
+
+//==============================================================================
+// Spriting mixins
+//==============================================================================
+@mixin sprite_dimensions($sprite, $image_name) {
+  height: image-height( sprite-file($sprite, $image_name) );
+  width: image-width( sprite-file($sprite, $image_name) );
+}
+
+@mixin bg_sprite($map, $image_name) {
+  background: sprite($map, $image_name);
+}
+
+@mixin full_sprite($list, $image_name) {
+  $normal: nth($list, 1);
+  @include bg_sprite($normal, $image_name);
+  @include sprite_dimensions($normal, $image_name);
+
+  @if length($list) == 2 {
+    @include retina {
+
+      $retina: nth($list, 2);
+
+      & {
+        $pos: sprite-position($retina, $image_name);
+        background-image: sprite-url($retina);
+        background-position: nth($pos, 1) nth($pos, 2) / 2;
+        @include background-size(image-width(sprite-path($normal)), auto);
+      }
+    }
+  }
+}
+
+// Media Queries
+@mixin respond_to($media) {
+  @if $media == tinyscreens {
+    @media only screen and (max-width: 479px) { @content; }
+  }
+  @else if $media == smallandsmallerscreens {
+    @media only screen and (max-width: 767px) { @content; }
+  }
+  @else if $media == iPadDown {
+    @media only screen and (max-width: 768px) { @content; }
+  }
+  @else if $media == mediumscreens {
+    @media only screen and (min-width: 767px) and (max-width: 1023px) { @content; }
+  }
+  @else if $media == mediumandsmallerscreens {
+    @media only screen and (max-width: 1023px) { @content; }
+  }
+  @else if $media == standardPlus {
+    @media only screen and (min-width: 1024px) { @content; }
+  }
+  @else if $media == standardscreens {
+    @media only screen and (min-width: 1024px) and (max-width: 1199px) { @content; }
+  }
+  @else if $media == largePlus {
+    @media only screen and (min-width: 1200px) { @content; }
+  }
+  @else if $media == shortViewport {
+    @media only screen and (max-height: 740px) and (min-width: 960px) { @content; }
+  }
+  @else if $media == shortVideoViewport {
+    @media only screen and (max-height: 800px) and (min-width: 960px) { @content; }
+  }
+  @else {
+    @media only screen and ($media) { @content; }
+  }
+}

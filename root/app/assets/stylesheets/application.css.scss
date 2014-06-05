@@ -1,15 +1,17 @@
-// Libs
-@import 'compass/reset';
+// Base
+@import 'base/normalize';
+@import 'base/constants';
+@import 'base/typography';
+@import 'base/layout';
+@import 'base/grid';
+@import 'base/mixins';
 
-// Defaults for fonts, colors, form elements, grids, etc.
-@import 'base';
-
-// Button creators, themes, etc.
-@import 'mixins';
-
-// Lozenges, lists, arrows, etc.
+// Components
 @import 'components';
 
-// Page specific, 1 file per resource.
-@import 'layouts';
+// Partials
+@import 'partials';
+
+// Pages
+@import 'pages';
 

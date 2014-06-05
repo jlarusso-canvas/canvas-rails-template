@@ -17,6 +17,10 @@ canvas-rails-template
 - [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
 
 ### TODO
-- page specific js/css?
 - js safety closures issue?
-
+- standardize camel case, underscore, whatever for js/ruby and for id/class
+- prefix 'js-' to classes that have no styles attached and are js only
+- css
+  - pages/ are for non-reusable page specific styles
+  - modules are for 
+  - componenets are to set default styles for html elements
