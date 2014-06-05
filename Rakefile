@@ -81,6 +81,17 @@ task :new do
     Project.run "rake db:migrate"
   end
 
+
+  # Cleanup
+  # ---------------------------------------------------------------------------
+  Project.alert "-> Cleaning up."
+  proj.exe_in_root do
+    Project.run "rm app/assets/stylesheets/application.css"
+    Project.run "rm app/views/layouts/application.html.erb"
+    Project.run "rm README.rdoc"
+  end
+
+
   puts "Success! Your new Rails project is installed at '../#{proj.name}'".green
   puts ""
 end
