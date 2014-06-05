@@ -1,6 +1,18 @@
+// Vendor
 @import 'bootstrap';
-@import 'admin/base';
-@import 'admin/mixins';
-@import 'admin/components';
-@import 'admin/layouts';
+@import 'normalize';
 
+// Base
+@import 'base/variables';
+@import 'base/typography';
+@import 'base/layout';
+@import 'base/mixins';
+
+// Components
+@import 'components';
+
+// Partials
+@import 'partials';
+
+// Pages
+@import 'pages';
