@@ -56,6 +56,6 @@ end
 # -----------------------------------------------------------------------------
 gem 'awesome_print'
 gem 'draper'
-gem 'annotate'
+# gem 'annotate'
 gem 'yard'
 
