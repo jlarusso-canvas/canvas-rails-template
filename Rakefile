@@ -92,7 +92,8 @@ task :new do
   end
 
 
-  puts "Success! Your new Rails project is installed at '../#{proj.name}'".green
+  puts "Success! Your new Rails project is installed. Let me cd over there for you.".green
+  Project.run "cd ../#{proj.name}"
   puts ""
 end
 
