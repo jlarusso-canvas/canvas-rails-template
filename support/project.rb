@@ -1,8 +1,11 @@
 class Project
   load 'support/ascii.rb'
-  attr_accessor :name, :gem_options
+  attr_accessor :name, :gem_options, :ruby_version, :rails_version
 
   def initialize
+    @ruby_version = '2.1.2'
+    @rails_version = '4.1.1'
+    @exe_new_flags = ['--skip-gemfile', '--skip-test-unit', '-d mysql', '2>&1']
     @gem_options = []
     @avail_gem_groups = Dir.entries('gem-groups').select { |f| !File.directory?(f) }
     puts Ascii::output
@@ -23,6 +26,11 @@ class Project
       end
       puts ""
     end
+  end
+
+  def exe_new(more_flags=[])
+    flags = @exe_new_flags + more_flags
+    `rails _#{rails_version}_ new ../#{name} #{flags.join(' ')}`
   end
 
   def exe_in_root(&block)

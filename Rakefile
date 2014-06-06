@@ -10,11 +10,9 @@ task :new do
 
   # Reset
   # ---------------------------------------------------------------------------
-  proj = Project.new
-  Project.alert "-> Checking Ruby version"
-  Project.run "rvm install 2.1.2"
-  Project.alert "-> Checking Rails version"
-  Project.run "gem install rails --version=4.1.1"
+  proj = Project.new # => See Project class for defaults
+  Project.alert "-> Checking Ruby version."
+  Project.run "rvm install #{proj.ruby_version}"
   Project.run "cp -v templates/Gemfile root/Gemfile"
 
 
@@ -33,7 +31,14 @@ task :new do
   # Create project
   # ---------------------------------------------------------------------------
   Project.alert "-> Creating Rails app."
-  Project.run "rails _4.1.1_ new ../#{proj.name} --skip-gemfile --skip-test-unit -d mysql"
+  exe_new_output = proj.exe_new
+  if exe_new_output.match(/Gem::LoadError/)
+    Project.alert "-> Installing Rails #{proj.rails_version}."
+    Project.run "gem install rails --version=#{proj.rails_version}"
+    puts proj.exe_new
+  else
+    puts exe_new_output
+  end
 
 
   # Copy Gemfile and 'bundle install'
