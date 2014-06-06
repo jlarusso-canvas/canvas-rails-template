@@ -73,6 +73,7 @@ task :new do
   # ---------------------------------------------------------------------------
   Project.alert "-> Overwriting with custom files."
   Project.run "cp -rv root/* ../#{proj.name}"
+  Project.run "echo 'World(FactoryGirl::Syntax::Methods)\n' >> ../#{proj.name}/features/support/env.rb"
 
 
   # Database stuff
