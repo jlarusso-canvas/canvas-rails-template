@@ -13,6 +13,8 @@ task :new do
   proj = Project.new
   Project.alert "-> Checking Ruby version"
   Project.run "rvm install 2.1.2"
+  Project.alert "-> Checking Rails version"
+  Project.run "gem install rails --version=4.1.1"
   Project.run "cp -v templates/Gemfile root/Gemfile"
 
 
@@ -31,13 +33,13 @@ task :new do
   # Create project
   # ---------------------------------------------------------------------------
   Project.alert "-> Creating Rails app."
-  Project.run "rails new ../#{proj.name} --skip-gemfile --skip-test-unit -d mysql"
+  Project.run "rails _4.1.1_ new ../#{proj.name} --skip-gemfile --skip-test-unit -d mysql"
 
 
   # Copy Gemfile and 'bundle install'
   # ---------------------------------------------------------------------------
   Project.run "mv -v root/Gemfile ../#{proj.name}"
-  Project.alert "-> Installing gems; this may take a minute or two."
+  Project.alert "-> Installing gems; this may take a while. Grab a sandwich and come back in a few minutes."
   proj.exe_in_root { puts `bundle install` }
 
 
