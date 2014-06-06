@@ -2,6 +2,8 @@ require 'pry'
 load 'support/project.rb'
 
 task :new do
+  # Don't buffer output- flush immediately
+  $stdout.sync = true
 
   # Make it look good
   # ---------------------------------------------------------------------------
@@ -45,7 +47,9 @@ task :new do
   # ---------------------------------------------------------------------------
   Project.run "mv -v root/Gemfile ../#{proj.name}"
   Project.alert "-> Installing gems; this may take a while. Grab a sandwich and come back in a few minutes."
-  proj.exe_in_root { puts `bundle install` }
+  proj.exe_in_root do
+    Project.run "bundle install"
+  end
 
 
   # Run installers and generators
@@ -73,7 +77,7 @@ task :new do
   # ---------------------------------------------------------------------------
   Project.alert "-> Overwriting with custom files."
   Project.run "cp -rv root/* ../#{proj.name}"
-  Project.run "echo 'World(FactoryGirl::Syntax::Methods)\n' >> ../#{proj.name}/features/support/env.rb"
+  Project.append("World(FactoryGirl::Syntax::Methods)", "../#{proj.name}/features/support/env.rb")
 
 
   # Database stuff

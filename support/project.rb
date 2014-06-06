@@ -30,11 +30,13 @@ class Project
 
   def exe_new(more_flags=[])
     flags = @exe_new_flags + more_flags
-    `rails _#{rails_version}_ new ../#{name} #{flags.join(' ')}`
+    cmd = "rails _#{rails_version}_ new ../#{name} #{flags.join(' ')}"
+    puts cmd.blue
+    `#{cmd}`
   end
 
   def exe_in_root(&block)
-    Dir.chdir("../#{self.name}") do
+    Dir.chdir("../#{name}") do
       instance_eval(&block)
     end
   end
@@ -49,6 +51,13 @@ class Project
     puts ""
     puts ""
     puts str.yellow
+  end
+
+  def self.append(text, path)
+    puts ""
+    cmd = "echo '#{text}' >> #{path}"
+    puts cmd.blue
+    `#{cmd}`
   end
 
   private
