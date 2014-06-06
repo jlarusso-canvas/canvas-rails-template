@@ -77,7 +77,16 @@ task :new do
   # ---------------------------------------------------------------------------
   Project.alert "-> Overwriting with custom files."
   Project.run "cp -rv root/* ../#{proj.name}"
-  Project.run "cp -rv admin/* ../#{proj.name}" if gem_options.include? 'cms'
+  if proj.gem_options.include? 'cms'
+    Project.run "cp -rv admin/* ../#{proj.name}"
+
+    if proj.gem_options.include? 'devise'
+      gemfile = File.read('Gemfile')
+      old = "# gem 'devise-async'"
+      new = "gem 'devise-async'"
+      File.open("Gemfile", "w") { |file| file.puts gemfile.gsub(old, new) }
+    end
+  end
   Project.append("World(FactoryGirl::Syntax::Methods)", "../#{proj.name}/features/support/env.rb")
 
 
@@ -87,8 +96,7 @@ task :new do
     db_config = File.read('config/database.yml')
     old = "default: &default\n  adapter: mysql2\n  encoding: utf8\n  pool: 5\n  username: root\n  password:"
     new = "default: &default\n  adapter: mysql2\n  encoding: utf8\n  pool: 5\n  username: root\n  password: pw"
-    replace = db_config.gsub(old, new)
-    File.open("config/database.yml", "w") { |file| file.puts replace }
+    File.open("config/database.yml", "w") { |file| file.puts db_config.gsub(old, new) }
 
     Project.run "rake db:create"
     Project.run "rake db:migrate"
