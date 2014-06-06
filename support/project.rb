@@ -20,7 +20,7 @@ class Project
       if input == "y" || input == "yes"
         puts "Including..."
         `cat gem-groups/#{group_name} >> root/Gemfile`
-        @gem_options << 'cms'
+        @gem_options << group_name
       else
         puts "Skipping..."
       end
