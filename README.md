@@ -25,9 +25,13 @@ def page_name
 end
 ```
 - `page_name` is applied to the body class:
-`%body{class: "#{page_name}"}`
+```
+# => In app/views/layouts/application.html.haml
+%body{class: "#{page_name}"}
+```
 - `page_name` is stored as a js variable:
 ```
+# => In app/views/layouts/application.html.haml
 %script
   var App = App || {};
   App.settings = {
