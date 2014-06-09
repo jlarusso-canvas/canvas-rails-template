@@ -113,11 +113,23 @@ task :new do
     Project.run "rm app/assets/stylesheets/application.css"
     Project.run "rm app/views/layouts/application.html.erb"
     Project.run "rm README.rdoc"
+    Project.gsub_text("config/routes.rb",
+                      "Rails.application.routes.draw do\n",
+                      "Rails.application.routes.draw do\n  root  'application#home'\n",
+                     )
+    Project.gsub_text("config/environments/production.rb",
+                      "Rails.application.configure do\n",
+                      "Rails.application.configure do\n  config.cache_store = :dalli_store\n"
+                     )
 
     if gem_options.include? 'mail'
       Project.gsub_text("config/environments/development.rb",
                         "Rails.application.configure do\n  # Settings specified here will take precedence over those in config/application.rb.\n\n",
                         "Rails.application.configure do\n  # Settings specified here will take precedence over those in config/application.rb.\n\n  config.action_mailer.delivery_method = :letter_opener\n\n"
+                       )
+      Project.gsub_text("config/environments/development.rb",
+                        "config.action_mailer.raise_delivery_errors = false",
+                        "config.action_mailer.default_url_options = { host: 'localhost:3000' }\n  config.action_mailer.raise_delivery_errors = false"
                        )
       Project.gsub_text("features/support/env.rb",
                         "require 'cucumber/rails'\n",
@@ -139,11 +151,6 @@ task :new do
                         "devise_for :administrators\n\n  namespace :admin do\n    root 'application#home'\n  end\n\n  "
                        )
     end
-
-    Project.gsub_text("config/routes.rb",
-                      "Rails.application.routes.draw do\n",
-                      "Rails.application.routes.draw do\n  root  'application#home'\n",
-                     )
   end
 
 
