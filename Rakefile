@@ -72,6 +72,7 @@ task :new do
     if gem_options.include? 'cms'
       Project.run "rails generate simple_form:install"
       Project.run "rails generate devise:install"
+      Project.run "rails generate devise:views"
       Project.run "rails generate devise Administrator"
     end
 
@@ -131,6 +132,18 @@ task :new do
                         "RSpec.configure do |config|\n  config.include(EmailSpec::Helpers)\n  config.include(EmailSpec::Matchers)\n  "
                        )
     end
+
+    if gem_options.include? 'cms'
+      Project.gsub_text("config/routes.rb",
+                        "devise_for :administrators\n  ",
+                        "devise_for :administrators\n\n  namespace :admin do\n    root 'application#home'\n  end\n\n  "
+                       )
+    end
+
+    Project.gsub_text("config/routes.rb",
+                      "Rails.application.routes.draw do\n",
+                      "Rails.application.routes.draw do\n  root  'application#home'\n",
+                     )
   end
 
 

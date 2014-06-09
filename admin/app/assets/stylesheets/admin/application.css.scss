@@ -1,6 +1,6 @@
 // Vendor
-@import 'bootstrap';
 @import 'normalize';
+@import 'bootstrap';
 
 // Base
 @import 'base/variables';
@@ -9,10 +9,11 @@
 @import 'base/mixins';
 
 // Components
-@import 'components';
+@import 'components/button';
+@import 'components/alert';
 
 // Partials
-@import 'partials';
+@import 'partials/footer';
 
 // Pages
-@import 'pages';
+@import 'pages/home';

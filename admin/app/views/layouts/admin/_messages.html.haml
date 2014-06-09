@@ -1,0 +1,4 @@
+- flash.each do |key, value|
+  .alert{class: "#{flash_class(key)}"}
+    %button.close{type: 'button', data: {dismiss: "alert"}} &times;
+    = value

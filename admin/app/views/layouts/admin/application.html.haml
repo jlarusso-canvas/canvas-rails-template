@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title
+    = stylesheet_link_tag "admin/application", media: "all"
+    = csrf_meta_tags
+
+  %body{class: "#{page_name}"}
+    - if administrator_signed_in?
+      = render 'layouts/admin/navbar'
+    = render 'layouts/admin/messages'
+    = yield
+
+    %script
+      var App = App || {};
+      App.settings = {
+      page: "#{page_name}"
+      };
+
+    = javascript_include_tag "admin/application"

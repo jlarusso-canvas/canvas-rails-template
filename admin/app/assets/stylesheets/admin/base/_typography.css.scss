@@ -1,25 +1,29 @@
-// Typefaces
-@font-face {
-  font-family: 'RomanNormal';
-  font-weight: normal;
-  src: url('/fonts/29E748_0_0.eot');
-  src: url('/fonts/29E748_0_0.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/29E748_0_0.woff') format('woff'),
-    url('/fonts/29E748_0_0.ttf') format('truetype');
-}
+// // Typefaces
+// //-----------------------------------------------------------------------------
+// @font-face {
+//   font-family: 'romannormal';
+//   font-weight: normal;
+//   src: url('/fonts/29e748_0_0.eot');
+//   src: url('/fonts/29e748_0_0.eot?#iefix') format('embedded-opentype'),
+//     url('/fonts/29e748_0_0.woff') format('woff'),
+//     url('/fonts/29e748_0_0.ttf') format('truetype');
+// }
 
-@font-face {
-  font-family: 'RomanThin';
-  font-weight: font-weight: 300;
-  src: url('/fonts/29E748_0_0.eot');
-  src: url('/fonts/29E748_0_0.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/29E748_0_0.woff') format('woff'),
-    url('/fonts/29E748_0_0.ttf') format('truetype');
-}
+// @font-face {
+//   font-family: 'romanthin';
+//   font-weight: 300;
+//   src: url('/fonts/29e748_0_0.eot');
+//   src: url('/fonts/29e748_0_0.eot?#iefix') format('embedded-opentype'),
+//     url('/fonts/29e748_0_0.woff') format('woff'),
+//     url('/fonts/29e748_0_0.ttf') format('truetype');
+// }
 
-// Font Family variables
-$font-regular: "RomanNormal", Helvetica, Arial, sans-serif;
-$font-roman-thin: "RomanThin", Helvetica, Arial, sans-serif;
+
+// // Font family variables
+// //-----------------------------------------------------------------------------
+// $font-regular: "romannormal", helvetica, arial, sans-serif;
+// $font-roman-thin: "romanthin", helvetica, arial, sans-serif;
+
 
 // Mixins
 //-----------------------------------------------------------------------------
@@ -27,4 +31,3 @@ $font-roman-thin: "RomanThin", Helvetica, Arial, sans-serif;
   $em: ($tracking / 1000);
   letter-spacing: $em + em;
 }
-

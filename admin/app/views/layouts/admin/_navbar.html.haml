@@ -1,0 +1,10 @@
+%nav.navbar.navbar-default.navbar-fixed-top{role: "navigation"}
+  .container-fluid
+    .navbar-header
+      .navbar-brand CMS
+
+    %ul.nav.navbar-nav.navbar-left
+      -# %li= link_to 'Products', admin_products_path
+
+    %ul.nav.navbar-nav.navbar-right
+      %li= link_to 'Logout', destroy_administrator_session_path, method: :delete
