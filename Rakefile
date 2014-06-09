@@ -68,7 +68,10 @@ task :new do
     end
 
     if gem_options.include? 'mail'
-      # TODO: run mail generators and installers
+      Project.gsub_text("config/environments/development.rb",
+                        "Rails.application.configure do\n  # Settings specified here will take precedence over those in config/application.rb.\n\n",
+                        "Rails.application.configure do\n  # Settings specified here will take precedence over those in config/application.rb.\n\n  config.action_mailer.delivery_method = :letter_opener\n\n"
+                       )
     end
   end
 
@@ -81,10 +84,10 @@ task :new do
     Project.run "cp -rv admin/* ../#{proj.name}"
 
     if proj.gem_options.include? 'devise'
-      gemfile = File.read('Gemfile')
-      old = "# gem 'devise-async'"
-      new = "gem 'devise-async'"
-      File.open("Gemfile", "w") { |file| file.puts gemfile.gsub(old, new) }
+      Project.gsub_text("Gemfile",
+                        "# gem 'devise-async'",
+                        "gem 'devise-async'"
+                       )
     end
   end
   Project.append("World(FactoryGirl::Syntax::Methods)", "../#{proj.name}/features/support/env.rb")
@@ -93,11 +96,10 @@ task :new do
   # Database stuff
   # ---------------------------------------------------------------------------
   proj.exe_in_root do
-    db_config = File.read('config/database.yml')
-    old = "default: &default\n  adapter: mysql2\n  encoding: utf8\n  pool: 5\n  username: root\n  password:"
-    new = "default: &default\n  adapter: mysql2\n  encoding: utf8\n  pool: 5\n  username: root\n  password: pw"
-    File.open("config/database.yml", "w") { |file| file.puts db_config.gsub(old, new) }
-
+    Project.gsub_text("config/database.yml",
+                      "default: &default\n  adapter: mysql2\n  encoding: utf8\n  pool: 5\n  username: root\n  password:",
+                      "default: &default\n  adapter: mysql2\n  encoding: utf8\n  pool: 5\n  username: root\n  password: pw"
+                     )
     Project.run "rake db:create"
     Project.run "rake db:migrate"
   end

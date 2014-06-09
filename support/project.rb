@@ -60,6 +60,14 @@ class Project
     `#{cmd}`
   end
 
+  def self.gsub_text(path, old, new)
+    puts ""
+    puts "gsub #{path}".blue
+    puts "Old:\n----\n#{old}\n\nNew:\n----\n#{new}"
+    file = File.read(path)
+    File.open(path, "w") { |f| f.puts file.gsub(old, new) }
+  end
+
   private
 
   def valid_gem_group?(group_name)
