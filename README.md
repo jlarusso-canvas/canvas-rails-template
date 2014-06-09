@@ -9,14 +9,33 @@ Canvas Rails Project Starter
 5. Follow instructions.
 6. Go to your project directory: `cd ../sample-app`
 
-#### TODO
-- js safety closures issue?
-- actual projectreadme should have categories for all the documentation we want in there for a project
-- have a little blurb in here about the directory structure for assets
-- explain body class thing
+# Documentation
+- Refer to [yard](http://rubydoc.info/gems/yard/file/docs/GettingStarted.md) when commenting your code.
+- Generate docs with `yard doc` on the command line.
 
 
 # Practices
+### Page name:
+- By default, classes will be added to the body element and can be overridden by setting `@page_name` in the relevant controller action.
+- Also, `page_name` is stored as a variable for page-specific js.
+```
+# => In app/helpers/application_helper.rb
+def page_name
+  @page_name || "#{controller_name} #{action_name}"
+end
+```
+- `page_name` is applied to the body class:
+`%body{class: "#{page_name}"}`
+- `page_name` is stored as a js variable:
+```
+%script
+  var App = App || {};
+  App.settings = {
+  page: "#{page_name}"
+  };
+```
+
+
 ### Modular CSS naming conventions:
 See [John Long's article](http://thesassway.com/advanced/modular-css-naming-conventions) for details on modular naming.
 
@@ -57,10 +76,6 @@ Not: `.left { margin: 5px };`
 - Classes used by js should start with 'js-' and have no associated styles  
 
 
-### How to comment your code for documentation purposes:
-- Refer to [yard](http://rubydoc.info/gems/yard/file/docs/GettingStarted.md).
-
-
 ### Ruby style guide:
 - [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
 
@@ -82,4 +97,3 @@ Not: `.left { margin: 5px };`
 `_parseText: (text) ->`
 - Class names are capital camel case  
 `class ItemManager`
-

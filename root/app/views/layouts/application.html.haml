@@ -4,8 +4,14 @@
     %title
     = stylesheet_link_tag "application", media: "all"
     = csrf_meta_tags
-  %body{class: @body_class || "#{controller_name} #{action_name}"}
+
+  %body{class: "#{page_name}"}
     = yield
 
-    = javascript_include_tag "application"
+    %script
+      var App = App || {};
+      App.settings = {
+      page: "#{page_name}"
+      };
 
+    = javascript_include_tag "application"
