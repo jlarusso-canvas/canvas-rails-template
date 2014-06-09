@@ -6,8 +6,7 @@
     = csrf_meta_tags
 
   %body{class: "#{page_name}"}
-    - if administrator_signed_in?
-      = render 'layouts/admin/navbar'
+    = render 'layouts/admin/navbar'
     = render 'layouts/admin/messages'
     = yield
 

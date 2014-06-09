@@ -70,10 +70,10 @@ task :new do
     Project.run "rails generate dragonfly"
 
     if gem_options.include? 'cms'
-      Project.run "rails generate simple_form:install"
+      Project.run "rails generate simple_form:install --bootstrap"
       Project.run "rails generate devise:install"
-      Project.run "rails generate devise:views"
       Project.run "rails generate devise Administrator"
+      Project.run "rails generate devise:views administrators"
     end
 
     if gem_options.include? 'mail'
@@ -113,10 +113,10 @@ task :new do
     Project.run "rm app/assets/stylesheets/application.css"
     Project.run "rm app/views/layouts/application.html.erb"
     Project.run "rm README.rdoc"
-    Project.gsub_text("config/routes.rb",
-                      "Rails.application.routes.draw do\n",
-                      "Rails.application.routes.draw do\n  root  'application#home'\n",
-                     )
+    # Project.gsub_text("config/routes.rb",
+    #                   "Rails.application.routes.draw do\n",
+    #                   "Rails.application.routes.draw do\n  root  'application#home'\n",
+    #                  )
     Project.gsub_text("config/environments/production.rb",
                       "Rails.application.configure do\n",
                       "Rails.application.configure do\n  config.cache_store = :dalli_store\n"
@@ -146,9 +146,14 @@ task :new do
     end
 
     if gem_options.include? 'cms'
-      Project.gsub_text("config/routes.rb",
-                        "devise_for :administrators\n  ",
-                        "devise_for :administrators\n\n  namespace :admin do\n    root 'application#home'\n  end\n\n  "
+      # Project.gsub_text("config/routes.rb",
+      #                   "devise_for :administrators\n  ",
+      #                   "devise_for :administrators\n\n  namespace :admin do\n    root 'application#home'\n  end\n\n  "
+      #                  )
+
+      Project.gsub_text("config/initializers/devise.rb",
+                        "# config.scoped_views = false",
+                        "config.scoped_views = true"
                        )
     end
   end

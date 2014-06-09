@@ -17,3 +17,7 @@
 
 // Pages
 @import 'pages/home';
+
+.control-group input {
+  @extend .form-control;
+}

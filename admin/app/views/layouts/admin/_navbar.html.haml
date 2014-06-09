@@ -3,9 +3,10 @@
     .navbar-header
       .navbar-brand CMS
 
-    %ul.nav.navbar-nav.navbar-left
-      -# NOTE: Put your CMS resources here
-      -# %li= link_to 'Products', admin_products_path
+    - if administrator_signed_in?
+      %ul.nav.navbar-nav.navbar-left
+        -# NOTE: Put your CMS resources here
+        -# %li= link_to 'Products', admin_products_path
 
-    %ul.nav.navbar-nav.navbar-right
-      %li= link_to 'Logout', destroy_administrator_session_path, method: :delete
+      %ul.nav.navbar-nav.navbar-right
+        %li= link_to 'Logout', destroy_administrator_session_path, method: :delete
