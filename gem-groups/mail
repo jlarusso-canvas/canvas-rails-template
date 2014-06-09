@@ -3,5 +3,5 @@
 # -----------------------------------------------------------------------------
 gem 'letter_opener', group: :development
 gem 'email_spec', group: :test
-# gem 'devise-async'
+gem 'devise-async'
 

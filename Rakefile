@@ -46,6 +46,14 @@ task :new do
   # Copy Gemfile and 'bundle install'
   # ---------------------------------------------------------------------------
   Project.run "mv -v root/Gemfile ../#{proj.name}"
+
+  unless proj.gem_options.include?('mail') && proj.gem_options.include?('cms')
+    Project.gsub_text("../#{proj.name}/Gemfile",
+                      "gem 'devise-async'",
+                      "# gem 'devise-async'"
+                     )
+  end
+
   Project.alert "-> Installing gems; this may take a while. Grab a sandwich and come back in a few minutes."
   proj.exe_in_root do
     Project.run "bundle install"
@@ -68,10 +76,7 @@ task :new do
     end
 
     if gem_options.include? 'mail'
-      Project.gsub_text("config/environments/development.rb",
-                        "Rails.application.configure do\n  # Settings specified here will take precedence over those in config/application.rb.\n\n",
-                        "Rails.application.configure do\n  # Settings specified here will take precedence over those in config/application.rb.\n\n  config.action_mailer.delivery_method = :letter_opener\n\n"
-                       )
+      # Put mail generators here if needed.
     end
   end
 
@@ -80,16 +85,11 @@ task :new do
   # ---------------------------------------------------------------------------
   Project.alert "-> Overwriting with custom files."
   Project.run "cp -rv root/* ../#{proj.name}"
+
   if proj.gem_options.include? 'cms'
     Project.run "cp -rv admin/* ../#{proj.name}"
-
-    if proj.gem_options.include? 'devise'
-      Project.gsub_text("Gemfile",
-                        "# gem 'devise-async'",
-                        "gem 'devise-async'"
-                       )
-    end
   end
+
   Project.append("World(FactoryGirl::Syntax::Methods)", "../#{proj.name}/features/support/env.rb")
 
 
@@ -112,6 +112,25 @@ task :new do
     Project.run "rm app/assets/stylesheets/application.css"
     Project.run "rm app/views/layouts/application.html.erb"
     Project.run "rm README.rdoc"
+
+    if gem_options.include? 'mail'
+      Project.gsub_text("config/environments/development.rb",
+                        "Rails.application.configure do\n  # Settings specified here will take precedence over those in config/application.rb.\n\n",
+                        "Rails.application.configure do\n  # Settings specified here will take precedence over those in config/application.rb.\n\n  config.action_mailer.delivery_method = :letter_opener\n\n"
+                       )
+      Project.gsub_text("features/support/env.rb",
+                        "require 'cucumber/rails'\n",
+                        "require 'cucumber/rails'\nrequire 'email_spec/cucumber'\n"
+                       )
+      Project.gsub_text("spec/rails_helper.rb",
+                        "require 'rspec/rails'\n",
+                        "require 'rspec/rails'\nrequire 'email_spec'\n"
+                       )
+      Project.gsub_text("spec/rails_helper.rb",
+                        "RSpec.configure do |config|\n  ",
+                        "RSpec.configure do |config|\n  config.include(EmailSpec::Helpers)\n  config.include(EmailSpec::Matchers)\n  "
+                       )
+    end
   end
 
 
