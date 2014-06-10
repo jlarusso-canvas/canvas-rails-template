@@ -17,6 +17,7 @@ task :default do
   puts "Rails: #{proj.rails_version}"
   Project.alert "-> Checking Ruby version."
   Project.run "rvm install #{proj.ruby_version}"
+  Project.run "rvm use #{proj.ruby_version}"
   Project.run "cp -v templates/Gemfile root/Gemfile"
 
 
