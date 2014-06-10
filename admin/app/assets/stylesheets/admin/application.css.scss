@@ -11,13 +11,10 @@
 // Components
 @import 'components/button';
 @import 'components/alert';
+@import 'components/input';
 
 // Partials
 @import 'partials/footer';
 
 // Pages
 @import 'pages/home';
-
-.control-group input {
-  @extend .form-control;
-}

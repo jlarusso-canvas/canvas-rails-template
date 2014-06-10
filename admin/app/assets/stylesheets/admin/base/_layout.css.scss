@@ -1,10 +1,13 @@
 // // Sitewide / global styles after normalize
 // //-----------------------------------------------------------------------------
+html { height: 100%; }
+
 body {
+  height: 100%;
+  margin-top: 50px;
   padding: 50px;
 }
 
-// a {
-//   text-decoration: none;
-//   color: $link-color;
-// }
+a {
+  text-decoration: none;
+}
