@@ -16,7 +16,7 @@ Canvas Rails Project Starter
 
 
 # Practices
-### Page name:
+#### Page name:
 - We want to be able to apply page-specific js and css.
 - By default, the body element will be given page-specific class names.
 ```
@@ -40,7 +40,7 @@ end
 ```
 
 
-### Modular CSS naming conventions:
+#### Modular CSS naming conventions:
 See [John Long's article](http://thesassway.com/advanced/modular-css-naming-conventions) for details on modular naming.
 
 - Use dashes for class-names and id-names. No under_scores, no camelCase.
@@ -80,11 +80,11 @@ Not: `.left { margin: 5px };`
 - Classes used by js should start with 'js-' and have no associated styles  
 
 
-### Ruby style guide:
+#### Ruby style guide:
 - [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
 
 
-### Coffeescript naming conventions:
+#### Coffeescript naming conventions:
 - Variable names are lowercase and underscored  
 `item_count = 5`
 - Variable names that contain a jQuery object start with a dollar sign  
