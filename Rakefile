@@ -1,4 +1,3 @@
-require 'pry'
 load 'support/project.rb'
 
 task :default do
