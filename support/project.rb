@@ -19,7 +19,7 @@ class Project
 
       if input == "y" || input == "yes"
         puts "Including..."
-        `cat gem-groups/#{group_name} >> root/Gemfile`
+        `cat gem-groups/#{group_name} >> rails_root_dirs/default/Gemfile`
         @gem_options << group_name
       else
         puts "Skipping..."
