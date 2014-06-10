@@ -14,7 +14,7 @@ task :default do
   proj = Project.new # => See Project class for defaults
   Project.alert "-> Checking for Ruby #{proj.ruby_version}"
   ruby_version_output = `ruby -v`
-  unless ruby_version_output.match(/ruby 2.1.2/)
+  unless ruby_version_output.match(/ruby 2\.1\.2/)
     puts "Ruby #{proj.ruby_version} is not your current ruby.".red
     puts "Try running 'rvm use #{proj.ruby_version}'".red
     abort
