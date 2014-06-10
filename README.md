@@ -5,7 +5,7 @@ Canvas Rails Project Starter
 1. `cd` to the directory where you keep all of your projects.
 2. `git clone git@github.com:jlarusso-canvas/canvas-rails-template.git`
 3. `cd canvas-rails-template`
-4. Create a new rails app: `rake new`
+4. Create a new rails app: `rake`
 5. Follow instructions.
 6. Go to your project directory: `cd ../sample-app`
 

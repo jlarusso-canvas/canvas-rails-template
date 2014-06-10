@@ -1,7 +1,7 @@
 require 'pry'
 load 'support/project.rb'
 
-task :new do
+task :default do
   # Don't buffer output- flush immediately
   $stdout.sync = true
 
