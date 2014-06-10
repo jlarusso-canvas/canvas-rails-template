@@ -9,6 +9,7 @@ Canvas Rails Project Starter
 5. Follow instructions.
 6. Go to your project directory: `cd ../sample-app`
 
+
 # Documentation
 - Refer to [yard](http://rubydoc.info/gems/yard/file/docs/GettingStarted.md) when commenting your code.
 - Generate docs with `yard doc` on the command line.

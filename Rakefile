@@ -13,6 +13,9 @@ task :default do
   # Reset
   # ---------------------------------------------------------------------------
   proj = Project.new # => See Project class for defaults
+  Project.alert "### Setting up your environment (this may take some time) ###"
+  puts "Ruby: #{proj.ruby_version}"
+  puts "Rails: #{proj.rails_version}"
   Project.alert "-> Checking Ruby version."
   Project.run "rvm install #{proj.ruby_version}"
   Project.run "cp -v templates/Gemfile root/Gemfile"
