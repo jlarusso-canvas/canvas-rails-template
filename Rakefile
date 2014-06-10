@@ -12,12 +12,14 @@ task :default do
   # Reset
   # ---------------------------------------------------------------------------
   proj = Project.new # => See Project class for defaults
-  Project.alert "### Setting up your environment (this may take some time) ###"
-  puts "Ruby: #{proj.ruby_version}"
-  puts "Rails: #{proj.rails_version}"
-  Project.alert "-> Checking Ruby version."
-  Project.run "rvm install #{proj.ruby_version}"
-  Project.run "rvm use #{proj.ruby_version}"
+  Project.alert "-> Checking for Ruby #{proj.ruby_version}"
+  ruby_version_output = `ruby -v`
+  unless ruby_version_output.match(/ruby 2.1.2/)
+    puts "Ruby #{proj.ruby_version} is not your current ruby.".red
+    puts "Try running 'rvm use #{proj.ruby_version}'".red
+    abort
+  end
+
   Project.run "cp -v templates/Gemfile rails_root_dirs/default/Gemfile"
 
 
