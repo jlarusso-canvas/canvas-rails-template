@@ -18,7 +18,7 @@ task :default do
   Project.alert "-> Checking Ruby version."
   Project.run "rvm install #{proj.ruby_version}"
   Project.run "rvm use #{proj.ruby_version}"
-  Project.run "cp -v templates/Gemfile root/Gemfile"
+  Project.run "cp -v templates/Gemfile rails_root_dirs/default/Gemfile"
 
 
   # Get rails project name
@@ -48,7 +48,7 @@ task :default do
 
   # Copy Gemfile and 'bundle install'
   # ---------------------------------------------------------------------------
-  Project.run "mv -v root/Gemfile ../#{proj.name}"
+  Project.run "mv -v rails_root_dirs/default/Gemfile ../#{proj.name}"
 
   unless proj.gem_options.include?('mail') && proj.gem_options.include?('cms')
     Project.gsub_text("../#{proj.name}/Gemfile",
@@ -88,10 +88,10 @@ task :default do
   # Overwrite with custom files
   # ---------------------------------------------------------------------------
   Project.alert "-> Overwriting with custom files."
-  Project.run "cp -rv root/* ../#{proj.name}"
+  Project.run "cp -rv rails_root_dirs/default/* ../#{proj.name}"
 
   if proj.gem_options.include? 'cms'
-    Project.run "cp -rv admin/* ../#{proj.name}"
+    Project.run "cp -rv rails_root_dirs/admin/* ../#{proj.name}"
   end
 
   Project.append("World(FactoryGirl::Syntax::Methods)", "../#{proj.name}/features/support/env.rb")
@@ -116,10 +116,6 @@ task :default do
     Project.run "rm app/assets/stylesheets/application.css"
     Project.run "rm app/views/layouts/application.html.erb"
     Project.run "rm README.rdoc"
-    # Project.gsub_text("config/routes.rb",
-    #                   "Rails.application.routes.draw do\n",
-    #                   "Rails.application.routes.draw do\n  root  'application#home'\n",
-    #                  )
     Project.gsub_text("config/environments/production.rb",
                       "Rails.application.configure do\n",
                       "Rails.application.configure do\n  config.cache_store = :dalli_store\n"
@@ -149,11 +145,6 @@ task :default do
     end
 
     if gem_options.include? 'cms'
-      # Project.gsub_text("config/routes.rb",
-      #                   "devise_for :administrators\n  ",
-      #                   "devise_for :administrators\n\n  namespace :admin do\n    root 'application#home'\n  end\n\n  "
-      #                  )
-
       Project.gsub_text("config/initializers/devise.rb",
                         "# config.scoped_views = false",
                         "config.scoped_views = true"
