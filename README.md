@@ -17,20 +17,19 @@ Canvas Rails Project Starter
 
 # Practices
 ### Page name:
-- By default, classes will be added to the body element and can be overridden by setting `@page_name` in the relevant controller action.
-- Also, `page_name` is stored as a variable for page-specific js.
+- We want to be able to apply page-specific js and css.
+- By default, the body element will be given page-specific class names.
 ```
 # => In app/helpers/application_helper.rb
 def page_name
   @page_name || "#{controller_name} #{action_name}"
 end
-```
-- `page_name` is applied to the body class:
-```
+
 # => In app/views/layouts/application.html.haml
 %body{class: "#{page_name}"}
 ```
-- `page_name` is stored as a js variable:
+- These classes can be overwritten by setting `@page_name` in the relevant controller action.
+- `page_name` is also stored as a js variable removing the need for a DOM lookup when doing page-specific js.
 ```
 # => In app/views/layouts/application.html.haml
 %script
