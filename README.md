@@ -11,7 +11,7 @@ Canvas Rails Project Starter
 
 
 # Documentation
-- Refer to [yard](http://rubydoc.info/gems/yard/file/docs/GettingStarted.md) when commenting your code.
+- Refer to [yard](http://rubydoc.info/gems/yard/file/docs/GettingStarted.md) when commenting your ruby code.
 - Generate docs with `yard doc` on the command line.
 
 
