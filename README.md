@@ -105,3 +105,4 @@ Not: `.left { margin: 5px };`
 
 # TODO:
 - create `.ruby-version` and `.ruby-gemset` files before bundling.
+- add `config.include Devise::TestHelpers` for devise set up.
