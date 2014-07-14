@@ -8,7 +8,16 @@ class Project
     @exe_new_flags = ['--skip-gemfile', '--skip-test-unit', '-d mysql', '2>&1']
     @gem_options = []
     @avail_gem_groups = Dir.entries('gem-groups').select { |f| !File.directory?(f) }
+    I18n.enforce_available_locales = false
     puts Ascii::output
+  end
+
+  def slug
+    ActiveSupport::Inflector.parameterize(name).gsub('-', '_')
+  end
+
+  def slugged?
+    name != slug
   end
 
   def ask_gem_group(group_name)
@@ -30,13 +39,13 @@ class Project
 
   def exe_new(more_flags=[])
     flags = @exe_new_flags + more_flags
-    cmd = "rails _#{rails_version}_ new ../#{name} #{flags.join(' ')}"
+    cmd = "rails _#{rails_version}_ new ../#{slug} #{flags.join(' ')}"
     puts cmd.blue
     `#{cmd}`
   end
 
   def exe_in_root(&block)
-    Dir.chdir("../#{name}") do
+    Dir.chdir("../#{slug}") do
       instance_eval(&block)
     end
   end

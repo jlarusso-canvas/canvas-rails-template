@@ -1,4 +1,5 @@
 load 'support/project.rb'
+require 'active_support/inflector'
 
 task :default do
   # Don't buffer output- flush immediately
@@ -27,6 +28,9 @@ task :default do
   # ---------------------------------------------------------------------------
   Project.alert "-> Enter Rails project name:"
   proj.name = $stdin.gets.strip
+  if proj.slugged?
+    puts "Project slug saved as: #{proj.slug}"
+  end
 
 
   # Gem options
@@ -48,12 +52,21 @@ task :default do
   end
 
 
+  # Create .ruby-version and .ruby-gemset files
+  # ---------------------------------------------------------------------------
+  Project.alert "-> Creating .ruby-version and .ruby-gemset files"
+  proj.exe_in_root do
+    Project.run "echo #{proj.ruby_version} >> .ruby-version"
+    Project.run "echo #{proj.slug} >> .ruby-gemset"
+  end
+
+
   # Copy Gemfile and 'bundle install'
   # ---------------------------------------------------------------------------
-  Project.run "mv -v rails_root_dirs/default/Gemfile ../#{proj.name}"
+  Project.run "mv -v rails_root_dirs/default/Gemfile ../#{proj.slug}"
 
   unless proj.gem_options.include?('mail') && proj.gem_options.include?('cms')
-    Project.gsub_text("../#{proj.name}/Gemfile",
+    Project.gsub_text("../#{proj.slug}/Gemfile",
                       "gem 'devise-async'",
                       "# gem 'devise-async'"
                      )
@@ -90,13 +103,13 @@ task :default do
   # Overwrite with custom files
   # ---------------------------------------------------------------------------
   Project.alert "-> Overwriting with custom files."
-  Project.run "cp -rv rails_root_dirs/default/* ../#{proj.name}"
+  Project.run "cp -rv rails_root_dirs/default/* ../#{proj.slug}"
 
   if proj.gem_options.include? 'cms'
-    Project.run "cp -rv rails_root_dirs/admin/* ../#{proj.name}"
+    Project.run "cp -rv rails_root_dirs/admin/* ../#{proj.slug}"
   end
 
-  Project.append("World(FactoryGirl::Syntax::Methods)", "../#{proj.name}/features/support/env.rb")
+  Project.append("World(FactoryGirl::Syntax::Methods)", "../#{proj.slug}/features/support/env.rb")
 
 
   # Database stuff
@@ -155,7 +168,7 @@ task :default do
   end
 
 
-  puts "Success! Your new Rails project is installed in '../#{proj.name}'".green
+  puts "Success! Your new Rails project is installed in '../#{proj.slug}'".green
   puts ""
 end
 
