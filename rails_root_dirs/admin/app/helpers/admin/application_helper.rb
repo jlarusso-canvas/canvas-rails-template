@@ -10,7 +10,7 @@ module Admin::ApplicationHelper
 
   def true_false_icon(state)
     if state
-      '<i class="glyphicon glyphicon-ok green"></i>'.html_safe
+      '<i class="glyphicon glyphicon-ok"></i>'.html_safe
     else
       '<i class="glyphicon glyphicon-remove"></i>'.html_safe
     end
