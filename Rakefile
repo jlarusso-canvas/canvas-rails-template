@@ -57,7 +57,7 @@ task :default do
   Project.alert "-> Creating .ruby-version and .ruby-gemset files"
   proj.exe_in_root do
     Project.run "echo #{proj.ruby_version} >> .ruby-version"
-    Project.run "echo #{proj.slug} >> .ruby-gemset"
+    # Project.run "echo #{proj.slug} >> .ruby-gemset"
   end
 
 
